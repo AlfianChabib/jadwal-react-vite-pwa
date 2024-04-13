@@ -17,7 +17,4 @@ export const getPrayeTime = async (payload: GetPrayerPayload) => {
       .then((res) => resolve(res.data.data))
       .catch((err) => reject(err));
   });
-  // return await aladhan
-  //   .get(`/calendar/${year}/${month}?latitude=${latitude}&longitude=${longitude}&method=${method}`)
-  //   .then((res) => res.data.data);
 };
