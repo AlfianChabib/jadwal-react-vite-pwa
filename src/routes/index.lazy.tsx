@@ -5,6 +5,9 @@ import { createLazyFileRoute } from "@tanstack/react-router";
 import { usePrayerStore } from "@/stores/usePrayerStore";
 import { PrayerData } from "@/types/prayer";
 import { useQuery } from "@tanstack/react-query";
+import DailySchedule from "@/components/schedules/DailySchedule";
+import WeeklySchedule from "@/components/schedules/WeeklySchedule";
+import Hero from "@/components/home/Hero";
 
 export const Route = createLazyFileRoute("/")({ component: Index });
 
@@ -19,7 +22,7 @@ function Index() {
     });
   }, [setPosition, position]);
 
-  const { data: prayerData } = useQuery<PrayerData[]>({
+  const { data } = useQuery<PrayerData[]>({
     queryKey: ["prayerData", position, year, month],
     queryFn: () =>
       getPrayeTime({
@@ -31,13 +34,13 @@ function Index() {
       }),
   });
 
-  console.log(prayerData?.[9].timings);
+  console.log(data?.find((item) => item.date.gregorian.day === "Thursday"));
 
   return (
-    <section className="flex flex-col w-full">
-      {prayerData?.map((item, index) => {
-        return <div key={index}>{item.timings.Fajr && <p>{item.timings.Fajr}</p>}</div>;
-      })}
+    <section className="flex flex-col w-full mt-4 gap-2">
+      <Hero />
+      <DailySchedule />
+      <WeeklySchedule />
     </section>
   );
 }
