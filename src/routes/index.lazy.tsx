@@ -13,6 +13,7 @@ import { sendNotification } from "@/services/notification";
 export const Route = createLazyFileRoute("/")({ component: Index });
 
 function Index() {
+  const fmcToken = localStorage.getItem("fcmToken");
   const { setPosition, position } = usePrayerStore((state) => state);
   const year = new Date().getFullYear();
   const month = new Date().getMonth() + 1;
@@ -35,13 +36,11 @@ function Index() {
       }),
   });
 
-  const fmcToken = localStorage.getItem("fcmToken");
-
   useEffect(() => {
     sendNotification(
       {
-        title: "ServiceWorker Cookbook",
-        body: "testetsw",
+        title: "Jadwal Hari ini",
+        body: "membaca jadwal sholat",
       },
       fmcToken!
     );
