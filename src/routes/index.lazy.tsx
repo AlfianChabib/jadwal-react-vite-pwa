@@ -8,6 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 import DailySchedule from "@/components/schedules/DailySchedule";
 import WeeklySchedule from "@/components/schedules/WeeklySchedule";
 import Hero from "@/components/home/Hero";
+import { sendNotification } from "@/services/notification";
 
 export const Route = createLazyFileRoute("/")({ component: Index });
 
@@ -22,7 +23,7 @@ function Index() {
     });
   }, [setPosition, position]);
 
-  const { data } = useQuery<PrayerData[]>({
+  const { data, isLoading } = useQuery<PrayerData[]>({
     queryKey: ["prayerData", position, year, month],
     queryFn: () =>
       getPrayeTime({
@@ -34,12 +35,26 @@ function Index() {
       }),
   });
 
-  console.log(data?.find((item) => item.date.gregorian.day === "Thursday"));
+  const fmcToken = localStorage.getItem("fcmToken");
+
+  useEffect(() => {
+    sendNotification(
+      {
+        title: "ServiceWorker Cookbook",
+        body: "testetsw",
+      },
+      fmcToken!
+    );
+  }, [fmcToken]);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <section className="flex flex-col w-full mt-4 gap-2">
       <Hero />
-      <DailySchedule />
+      <DailySchedule data={data!} />
       <WeeklySchedule />
     </section>
   );

@@ -1,4 +1,5 @@
 import Header from "@/components/Header";
+import Notif from "@/components/Notif";
 import { createRootRoute, Outlet } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 
@@ -10,6 +11,7 @@ export const Route = createRootRoute({
       <div className="flex flex-col items-center bg-[url('./assets/bg.png')] w-full min-h-screen bg-center bg-cover p-2">
         <Header />
         <Outlet />
+        <Notif />
         {isProd ? null : <TanStackRouterDevtools />}
       </div>
     </main>
