@@ -5,7 +5,8 @@ import { RouterProvider, createRouter } from "@tanstack/react-router";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { routeTree } from "./routeTree.gen";
 import "./index.css";
-import NotificationFirebase from "./components/notification/NotificationFirebase.tsx";
+// import NotificationFirebase from "./components/notification/NotificationFirebase.tsx";
+import { registerServiceWorker } from "./registerSw.ts";
 
 const router = createRouter({ routeTree });
 
@@ -22,8 +23,10 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <QueryClientProvider client={queryClient}>
       <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
         <RouterProvider router={router} />
-        <NotificationFirebase />
+        {/* <NotificationFirebase /> */}
       </ThemeProvider>
     </QueryClientProvider>
   </React.StrictMode>
 );
+
+registerServiceWorker();

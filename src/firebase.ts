@@ -24,6 +24,5 @@ export const generateToken = async () => {
       vapidKey: "BEYwdMeDSW-WYxqt9meYpL-fRYgXNe5dJyn1hryXiCpteZXPKpAwmuoojdOcEtbu70TrsxhppedxLcvvyZnrz5I",
     });
     localStorage.setItem("fcmToken", token);
-    console.log(token);
   }
 };

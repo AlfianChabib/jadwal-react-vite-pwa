@@ -1,4 +1,4 @@
-import { sendNotification } from "@/lib/sendNotif";
+// import { sendNotification } from "@/lib/sendNotif";
 import { useCallback, useEffect } from "react";
 
 export default function Notif() {
@@ -6,10 +6,11 @@ export default function Notif() {
     if ("Notification" in window) {
       Notification.requestPermission().then((permission) => {
         if (permission === "granted") {
-          sendNotification({
-            title: "ServiceWorker Cookbook",
-            body: "Notification permission granted",
-          });
+          // sendNotification({
+          //   title: "ServiceWorker Cookbook",
+          //   body: "Notification permission granted",
+          // });
+          console.log("Notification permission granted");
         }
       });
     }

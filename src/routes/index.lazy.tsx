@@ -8,12 +8,12 @@ import { useQuery } from "@tanstack/react-query";
 import DailySchedule from "@/components/schedules/DailySchedule";
 import WeeklySchedule from "@/components/schedules/WeeklySchedule";
 import Hero from "@/components/home/Hero";
-import { sendNotification } from "@/services/notification";
+// import { sendNotification } from "@/services/notification";
 
 export const Route = createLazyFileRoute("/")({ component: Index });
 
 function Index() {
-  const fmcToken = localStorage.getItem("fcmToken");
+  // const fmcToken = localStorage.getItem("fcmToken");
   const { setPosition, position } = usePrayerStore((state) => state);
   const year = new Date().getFullYear();
   const month = new Date().getMonth() + 1;
@@ -36,15 +36,17 @@ function Index() {
       }),
   });
 
-  useEffect(() => {
-    sendNotification(
-      {
-        title: "Jadwal Hari ini",
-        body: "membaca jadwal sholat",
-      },
-      fmcToken!
-    );
-  }, [fmcToken]);
+  // useEffect(() => {
+  //   sendNotification(
+  //     {
+  //       title: "Jadwal Hari ini",
+  //       body: "membaca jadwal sholat",
+  //     },
+  //     fmcToken!
+  //   );
+  // }, [fmcToken]);
+
+  localStorage.setItem("notif", JSON.stringify({ title: "Good morning!", body: "It's 6 AM!" }));
 
   if (isLoading) {
     return <div>Loading...</div>;
